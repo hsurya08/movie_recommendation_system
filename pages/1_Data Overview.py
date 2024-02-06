@@ -16,7 +16,7 @@ if 'authenticated' not in st.session_state or st.session_state['authenticated']:
 
     st.session_state['combined_df'] = df_combined.reset_index(drop=True)
 
-    df_n_ratings = pd.DataFrame(df_combined.groupby('title')['rating','movieId'].mean())
+    df_n_ratings = pd.DataFrame(df_combined.groupby('title')[['rating','movieId']].mean())
     df_n_ratings['movieId'] = df_n_ratings['movieId'].astype(int)
     df_n_ratings['total ratings'] = pd.DataFrame(df_combined.groupby('title')['rating'].count())
     df_n_ratings.rename(columns = {'rating': 'mean ratings'}, inplace=True)
