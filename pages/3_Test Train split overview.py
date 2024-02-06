@@ -1,8 +1,8 @@
 import streamlit as st
-
+import pandas as pd
 if 'authenticated' not in st.session_state or st.session_state['authenticated']:
-    ratings = pd.read_csv('ratings.csv')
-    movies = pd.read_csv('movies.csv')
+    ratings = pd.read_csv('../ratings.csv')
+    movies = pd.read_csv('../movies.csv')
     df_r = ratings.copy()
     df_m = movies.copy()
     ratings.drop(['timestamp'], axis=1, inplace=True)
