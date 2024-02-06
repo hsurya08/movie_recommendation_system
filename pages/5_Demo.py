@@ -31,7 +31,7 @@ if 'authenticated' not in st.session_state or st.session_state['authenticated']:
     find_genres()
     genres['None'] = genres.pop('(no genres listed)')
     wordcloud = WordCloud(width=400, height=200, background_color = 'black', min_font_size=7).generate_from_frequencies(genres)
-    df_no_of_ratings = pd.DataFrame(combined_df.groupby('title')['rating','movieId'].mean())
+    df_no_of_ratings = pd.DataFrame(combined_df.groupby('title')[['rating','movieId']].mean())
     df_no_of_ratings['movieId'] = df_no_of_ratings['movieId'].astype(int)
     df_no_of_ratings['total ratings'] = pd.DataFrame(combined_df.groupby('title')['rating'].count())
     df_no_of_ratings.rename(columns = {'rating': 'mean ratings'}, inplace=True)
