@@ -12,7 +12,13 @@ st.session_state['authenticated'] = False
 names = ["Hemanth Surya", "Ingrid"]
 usernames = ["hsurya", "ingrid"]
 passwords = ["123", "456"]
-
+ratings = pd.read_csv('ratings.csv')
+movies = pd.read_csv('movies.csv')
+df_r = ratings.copy()
+df_m = movies.copy()
+ratings.drop(['timestamp'], axis=1, inplace=True)
+df_combined = pd.merge(ratings, movies, on = 'movieId')
+st.session_state['combined_df'] = df_combined.reset_index(drop=True)
 logged_in = False
 if not logged_in:
     username = st.text_input("Username")
