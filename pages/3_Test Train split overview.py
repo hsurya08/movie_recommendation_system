@@ -1,8 +1,14 @@
 import streamlit as st
 
 if 'authenticated' not in st.session_state or st.session_state['authenticated']:
+    ratings = pd.read_csv('ratings.csv')
+    movies = pd.read_csv('movies.csv')
+    df_r = ratings.copy()
+    df_m = movies.copy()
+    ratings.drop(['timestamp'], axis=1, inplace=True)
+    df_combined = pd.merge(ratings, movies, on = 'movieId')
     st.title("Test Train Split Overview")
-    st.dataframe(st.session_state['combined_df'].reset_index(drop=True))
+    st.dataframe(df_combined.reset_index(drop=True))
     st.write("The code splits user-specific data in a DataFrame into training and testing sets. It first groups the data by 'userId' to separate it for each user. Then, it iterates through each user's data, splitting it into training and testing sets using a 50/50 split ratio. The resulting sets are collected in lists. Finally, all the individual sets are concatenated to create complete training and testing datasets for analysis or machine learning tasks.")
     code = '''
     # Splitting data for each user
