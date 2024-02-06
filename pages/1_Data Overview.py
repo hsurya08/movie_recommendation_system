@@ -7,23 +7,6 @@ import pickle
 st.title("Data Overview")
 
 if 'authenticated' not in st.session_state or st.session_state['authenticated']:
-    ratings = pd.read_csv('ratings.csv')
-    movies = pd.read_csv('movies.csv')
-    df_r = ratings.copy()
-    df_m = movies.copy()
-    ratings.drop(['timestamp'], axis=1, inplace=True)
-    df_combined = pd.merge(ratings, movies, on = 'movieId')
-
-    st.session_state['combined_df'] = df_combined.reset_index(drop=True)
-
-    df_n_ratings = pd.DataFrame(df_combined.groupby('title')[['rating','movieId']].mean())
-    df_n_ratings['movieId'] = df_n_ratings['movieId'].astype(int)
-    df_n_ratings['total ratings'] = pd.DataFrame(df_combined.groupby('title')['rating'].count())
-    df_n_ratings.rename(columns = {'rating': 'mean ratings'}, inplace=True)
-
-    df_n_ratings.sort_values('total ratings', ascending=False).head(10)
-    st.session_state['weighted_df'] = df_n_ratings
-
     st.write("""
     ## Ratings
     ### “ratings.csv” file has 4 columns:(100836, 4)
