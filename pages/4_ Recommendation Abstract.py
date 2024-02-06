@@ -1,6 +1,6 @@
 import streamlit as st
 
-if st.session_state['authenticated']:
+if 'authenticated' not in st.session_state or st.session_state['authenticated']:
     st.title("Recommendation Abstract")
     st.write("""
         ## User-Based Collaborative Filtering (CF) in Movie Recommendations
