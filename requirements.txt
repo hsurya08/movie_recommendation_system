@@ -2,3 +2,6 @@ streamlit_authenticator
 pandas
 numpy
 matplotlib
+seaborn
+sklearn
+wordcloud
